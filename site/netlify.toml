@@ -1,0 +1,48 @@
+# Netlify configuration for vikemarketing.com
+# Publish directory is this folder itself (plain static HTML, no build step).
+[build]
+  publish = "."
+
+# Redirect the Netlify subdomain and www to the canonical domain once the custom domain is live.
+# Uncomment and replace YOUR-SITE with your Netlify site name.
+# [[redirects]]
+#   from = "https://YOUR-SITE.netlify.app/*"
+#   to = "https://vikemarketing.com/:splat"
+#   status = 301
+#   force = true
+
+[[redirects]]
+  from = "https://www.vikemarketing.com/*"
+  to = "https://vikemarketing.com/:splat"
+  status = 301
+  force = true
+
+# Old single-page anchors / legacy file name
+[[redirects]]
+  from = "/vike.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
