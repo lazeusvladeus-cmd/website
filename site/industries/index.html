@@ -29,30 +29,29 @@
 <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<!-- Fonts (self-hosted: no third-party request, GDPR-friendly) -->
+<link rel="preload" href="/assets/fonts/archivo-79dc5e.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/style.css?v=a366be1b">
 
 <!-- ================================================================
-     Google tag (GA4) — replace G-XXXXXXXXXX (2 places below) with
-     your own Measurement ID from Google Analytics > Admin > Data streams.
-     Consent Mode v2: analytics storage is denied until the visitor
-     accepts in the cookie banner (handled in /assets/js/main.js).
+     Google tag (GA4) — replace G-XXXXXXXXXX below with your own
+     Measurement ID (Google Analytics > Admin > Data streams).
+     Privacy + speed: the gtag.js library is only downloaded after the
+     visitor clicks "Accept analytics" in the cookie banner
+     (see loadAnalytics() in /assets/js/main.js).
      ================================================================ -->
 <script>
+  window.VIKE_GA_ID = 'G-XXXXXXXXXX';
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {
     ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
-    analytics_storage: 'denied', wait_for_update: 500
+    analytics_storage: 'denied'
   });
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', window.VIKE_GA_ID);
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v=d8bbcd3d" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikemarketing.com/"}, {"@type": "ListItem", "position": 2, "name": "Industries", "item": "https://vikemarketing.com/industries/"}]}</script>
 </head>
 <body>
@@ -60,7 +59,7 @@
 <div id="progress" aria-hidden="true"></div>
 <header class="site-header">
   <nav class="nav wrap" aria-label="Main">
-    <a href="/" class="logo" aria-label="Vike Marketing home"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span></span></a>
+    <a href="/" class="logo"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span><span class="visually-hidden"> Marketing, home page</span></span></a>
     <ul class="nav-menu" id="nav-menu">
       <li class="nav-item has-dropdown"><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd-services">Services<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dropdown" id="dd-services"><a href="/services/meta-ads-management/"><b>Meta Ads Management</b><small>Facebook &amp; Instagram campaigns built for leads and sales</small></a><a href="/services/google-ads-management/"><b>Google Ads Management</b><small>Search, Performance Max and local intent campaigns</small></a><a href="/services/seo/"><b>SEO</b><small>Technical, on-page and local search optimization</small></a><a href="/services/creative-production/"><b>Creative Production</b><small>Ad concepts, statics and short-form video that get tested</small></a><a class="dd-all" href="/services/">ALL SERVICES →</a></div></li>
       <li class="nav-item has-dropdown"><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd-industries" style="color:var(--accent)">Industries<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dropdown" id="dd-industries"><a href="/industries/ecommerce/"><b>Ecommerce</b><small>Online stores selling to consumers</small></a><a href="/industries/local-services/"><b>Local Services</b><small>Dental clinics, salons, gyms</small></a><a href="/industries/construction-real-estate/"><b>Construction &amp; Real Estate</b><small>Builders, renovators, developers, agents</small></a><a href="/industries/education-schools/"><b>Education &amp; Schools</b><small>Private schools, courses, tutoring</small></a><a class="dd-all" href="/industries/">ALL INDUSTRIES →</a></div></li>
@@ -115,14 +114,14 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="/" class="logo" aria-label="Vike Marketing home"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span></span></a>
+        <a href="/" class="logo"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span><span class="visually-hidden"> Marketing, home page</span></span></a>
         <p class="foot-desc">Performance marketing for small and growing businesses: Meta and Google ads, campaign strategy, creative production, SEO, social media management and marketing automation. Run remotely from Lviv, Ukraine.</p>
       </div>
       <div class="foot-col"><h2>Services</h2><a href="/services/meta-ads-management/">Meta Ads Management</a><a href="/services/google-ads-management/">Google Ads Management</a><a href="/services/seo/">SEO</a><a href="/services/creative-production/">Creative Production</a></div>
       <div class="foot-col"><h2>Industries</h2><a href="/industries/ecommerce/">Ecommerce</a><a href="/industries/local-services/">Local Services</a><a href="/industries/construction-real-estate/">Construction &amp; Real Estate</a><a href="/industries/education-schools/">Education &amp; Schools</a></div>
       <div class="foot-col">
         <h2>Company</h2>
-        <a href="/about/">About</a><a href="/pricing/">Pricing</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
+        <a href="/about/">About</a><a href="/pricing/">Pricing</a><a href="/free-audit/">Free funnel audit</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
         <h2 class="mt-24">Locations</h2>
         <a href="/locations/netherlands/">Netherlands</a><a href="/locations/united-kingdom/">United Kingdom</a><a href="/locations/ireland/">Ireland</a>
       </div>
@@ -163,6 +162,7 @@
           <p class="form-error" role="alert"></p>
           <p class="form-note">We reply within 24 hours on business days. Your details are only used to arrange the call. See our <a href="/privacy/">Privacy Policy</a>.</p>
         </form>
+      <p class="booking-alt">Prefer to pick a time yourself? <a data-booking-link href="/contact/" target="_blank" rel="noopener">Open the calendar</a></p>
     </div>
     <div class="success-state" data-success-state hidden>
       <div class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></div>
@@ -171,6 +171,11 @@
     </div>
   </div>
 </div>
+
+<nav class="mobile-cta" id="mobileCta" aria-label="Quick actions">
+  <a class="btn btn-secondary" href="/free-audit/">Free audit</a>
+  <button class="btn btn-primary" type="button" data-book>Book a call →</button>
+</nav>
 
 <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
   <p>We use Google Analytics cookies to understand which pages are useful. They stay off unless you accept. Details in our <a href="/privacy/">Privacy Policy</a>.</p>

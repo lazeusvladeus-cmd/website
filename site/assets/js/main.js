@@ -9,6 +9,8 @@
    TELEGRAM_CHAT_IDS  : one or more chat IDs that should receive new leads,
                         e.g. ['123456789', '-1001234567890']
    CONTACT_EMAIL      : address used for the mailto fallback.
+   BOOKING_URL        : optional scheduling link (Calendly, Cal.com...). When
+                        set, the booking form also offers "Open the calendar".
 
    If the Telegram values are left empty, or the Telegram request fails,
    the form falls back to opening a pre-filled email to CONTACT_EMAIL —
@@ -21,7 +23,8 @@
 var VIKE_CONFIG = {
   TELEGRAM_BOT_TOKEN: '',            // <-- paste bot token here
   TELEGRAM_CHAT_IDS: [],             // <-- e.g. ['123456789']
-  CONTACT_EMAIL: 'sales@vikemarketing.com'
+  CONTACT_EMAIL: 'sales@vikemarketing.com',
+  BOOKING_URL: ''                    // <-- optional: Calendly / Cal.com link, e.g. 'https://cal.com/vike/intro'
 };
 /* ======================== end of SITE CONFIG ============================ */
 
@@ -34,9 +37,15 @@ var VIKE_CONFIG = {
   /* ---------- reading progress bar ---------- */
   var bar = document.getElementById('progress');
   if(bar){
+    var ticking = false;
     var updateBar = function(){
-      var h = doc.scrollHeight - window.innerHeight;
-      bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var h = doc.scrollHeight - window.innerHeight;
+        bar.style.transform = 'scaleX(' + (h > 0 ? window.scrollY / h : 0) + ')';
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', updateBar, {passive:true});
     window.addEventListener('resize', updateBar);
@@ -257,9 +266,20 @@ var VIKE_CONFIG = {
   var KEY = 'vike_consent';
   function readConsent(){ try{ return localStorage.getItem(KEY); }catch(e){ return null; } }
   function saveConsent(v){ try{ localStorage.setItem(KEY, v); }catch(e){} }
+  var gaLoaded = false;
+  function loadAnalytics(){
+    // gtag.js is only fetched after consent: faster pages for everyone else.
+    if(gaLoaded || !window.VIKE_GA_ID || /X{6,}/.test(window.VIKE_GA_ID)) return;
+    gaLoaded = true;
+    var sc = document.createElement('script');
+    sc.async = true;
+    sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(window.VIKE_GA_ID);
+    document.head.appendChild(sc);
+  }
   function applyConsent(v){
     if(typeof window.gtag !== 'function') return;
     window.gtag('consent', 'update', {analytics_storage: v === 'granted' ? 'granted' : 'denied'});
+    if(v === 'granted') loadAnalytics();
   }
   if(banner){
     var stored = readConsent();
@@ -273,6 +293,28 @@ var VIKE_CONFIG = {
     document.querySelectorAll('[data-cookie-settings]').forEach(function(b){
       b.addEventListener('click', function(){ banner.classList.add('show'); });
     });
+  }
+
+  /* ---------- optional calendar link ---------- */
+  if(VIKE_CONFIG.BOOKING_URL){
+    doc.classList.add('has-booking-url');
+    document.querySelectorAll('[data-booking-link]').forEach(function(a){ a.href = VIKE_CONFIG.BOOKING_URL; });
+  }
+
+  /* ---------- sticky mobile call-to-action ---------- */
+  var mcta = document.getElementById('mobileCta');
+  if(mcta){
+    var foot = document.querySelector('.site-footer');
+    var mTick = false;
+    var updateMcta = function(){
+      if(mTick) return; mTick = true;
+      requestAnimationFrame(function(){
+        var nearFoot = foot && foot.getBoundingClientRect().top < window.innerHeight;
+        mcta.classList.toggle('show', window.scrollY > 500 && !nearFoot);
+        mTick = false;
+      });
+    };
+    window.addEventListener('scroll', updateMcta, {passive:true});
   }
 
   /* ---------- footer year ---------- */

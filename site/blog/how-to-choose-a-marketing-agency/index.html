@@ -31,31 +31,30 @@
 <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<!-- Fonts (self-hosted: no third-party request, GDPR-friendly) -->
+<link rel="preload" href="/assets/fonts/archivo-79dc5e.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/style.css?v=a366be1b">
 
 <!-- ================================================================
-     Google tag (GA4) — replace G-XXXXXXXXXX (2 places below) with
-     your own Measurement ID from Google Analytics > Admin > Data streams.
-     Consent Mode v2: analytics storage is denied until the visitor
-     accepts in the cookie banner (handled in /assets/js/main.js).
+     Google tag (GA4) — replace G-XXXXXXXXXX below with your own
+     Measurement ID (Google Analytics > Admin > Data streams).
+     Privacy + speed: the gtag.js library is only downloaded after the
+     visitor clicks "Accept analytics" in the cookie banner
+     (see loadAnalytics() in /assets/js/main.js).
      ================================================================ -->
 <script>
+  window.VIKE_GA_ID = 'G-XXXXXXXXXX';
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {
     ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
-    analytics_storage: 'denied', wait_for_update: 500
+    analytics_storage: 'denied'
   });
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', window.VIKE_GA_ID);
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script src="/assets/js/main.js" defer></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How to choose a marketing agency without getting burned", "description": "A practical guide for small business owners: what to ask a marketing agency, red flags to avoid, how pricing models compare and what month one should look like.", "image": ["https://vikemarketing.com/assets/img/blog/how-to-choose-a-marketing-agency.jpg"], "datePublished": "2026-08-18", "dateModified": "2026-08-18", "wordCount": 1186, "author": {"@type": "Person", "name": "Vladyslav", "url": "https://vikemarketing.com/about/"}, "publisher": {"@type": "Organization", "@id": "https://vikemarketing.com/#organization", "name": "Vike Marketing", "logo": {"@type": "ImageObject", "url": "https://vikemarketing.com/assets/img/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://vikemarketing.com/blog/how-to-choose-a-marketing-agency/"}, "articleSection": "Guide", "inLanguage": "en"}</script>
+<script src="/assets/js/main.js?v=d8bbcd3d" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How to choose a marketing agency without getting burned", "description": "A practical guide for small business owners: what to ask a marketing agency, red flags to avoid, how pricing models compare and what month one should look like.", "image": ["https://vikemarketing.com/assets/img/blog/how-to-choose-a-marketing-agency.jpg"], "datePublished": "2026-08-18", "dateModified": "2026-08-18", "wordCount": 1186, "author": {"@type": "Person", "@id": "https://vikemarketing.com/about/#vladyslav", "name": "Vladyslav", "url": "https://vikemarketing.com/about/"}, "publisher": {"@type": "Organization", "@id": "https://vikemarketing.com/#organization", "name": "Vike Marketing", "logo": {"@type": "ImageObject", "url": "https://vikemarketing.com/assets/img/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://vikemarketing.com/blog/how-to-choose-a-marketing-agency/"}, "articleSection": "Guide", "inLanguage": "en"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikemarketing.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikemarketing.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to choose a marketing agency without getting burned", "item": "https://vikemarketing.com/blog/how-to-choose-a-marketing-agency/"}]}</script>
 </head>
 <body>
@@ -63,7 +62,7 @@
 <div id="progress" aria-hidden="true"></div>
 <header class="site-header">
   <nav class="nav wrap" aria-label="Main">
-    <a href="/" class="logo" aria-label="Vike Marketing home"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span></span></a>
+    <a href="/" class="logo"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span><span class="visually-hidden"> Marketing, home page</span></span></a>
     <ul class="nav-menu" id="nav-menu">
       <li class="nav-item has-dropdown"><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd-services">Services<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dropdown" id="dd-services"><a href="/services/meta-ads-management/"><b>Meta Ads Management</b><small>Facebook &amp; Instagram campaigns built for leads and sales</small></a><a href="/services/google-ads-management/"><b>Google Ads Management</b><small>Search, Performance Max and local intent campaigns</small></a><a href="/services/seo/"><b>SEO</b><small>Technical, on-page and local search optimization</small></a><a href="/services/creative-production/"><b>Creative Production</b><small>Ad concepts, statics and short-form video that get tested</small></a><a class="dd-all" href="/services/">ALL SERVICES →</a></div></li>
       <li class="nav-item has-dropdown"><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd-industries">Industries<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dropdown" id="dd-industries"><a href="/industries/ecommerce/"><b>Ecommerce</b><small>Online stores selling to consumers</small></a><a href="/industries/local-services/"><b>Local Services</b><small>Dental clinics, salons, gyms</small></a><a href="/industries/construction-real-estate/"><b>Construction &amp; Real Estate</b><small>Builders, renovators, developers, agents</small></a><a href="/industries/education-schools/"><b>Education &amp; Schools</b><small>Private schools, courses, tutoring</small></a><a class="dd-all" href="/industries/">ALL INDUSTRIES →</a></div></li>
@@ -90,9 +89,10 @@
     <div class="article-meta"><span class="author"><span class="avatar" aria-hidden="true">V</span>By <a href="/about/">Vladyslav</a></span><span>Published <time datetime="2026-08-18">18 August 2026</time></span><span>5 min read</span></div>
     
   </div>
-</section><div class="cover-band"><div class="wrap article-cover"><img src="/assets/img/blog/how-to-choose-a-marketing-agency.jpg" width="1200" height="630" alt="Cover illustration for the article “How to choose a marketing agency without getting burned” by Vike Marketing" fetchpriority="high"></div></div><section class="light article-body">
+</section><div class="cover-band"><div class="wrap article-cover"><picture><source type="image/webp" srcset="/assets/img/blog/how-to-choose-a-marketing-agency-600.webp 600w, /assets/img/blog/how-to-choose-a-marketing-agency.webp 1200w" sizes="(max-width: 1000px) 100vw, 1000px"><img src="/assets/img/blog/how-to-choose-a-marketing-agency.jpg" srcset="/assets/img/blog/how-to-choose-a-marketing-agency-600.jpg 600w, /assets/img/blog/how-to-choose-a-marketing-agency.jpg 1200w" sizes="(max-width: 1000px) 100vw, 1000px" width="1200" height="630" alt="Cover illustration for the article “How to choose a marketing agency without getting burned” by Vike Marketing" fetchpriority="high"></picture></div></div><section class="light article-body">
   <div class="wrap article-layout">
     <article class="prose">
+      <aside class="takeaways" aria-label="Key takeaways"><div class="eyebrow">Key takeaways</div><ul><li>Decide the outcome you want and what a customer is worth before you talk to any agency.</li><li>Insist that ad accounts, pixels and analytics are owned by you, with the agency added as a partner.</li><li>Treat guaranteed results, vague ownership answers and pressure to sign today as red flags.</li><li>A flat monthly fee with a written scope is the easiest model for most small businesses to budget.</li></ul></aside>
       
 <p>Most small business owners who have hired a marketing agency have a story about one that didn't work out. Reports full of impressions and “reach”. An account manager who changed every two months. A contract that took longer to exit than the campaigns took to fail. And at the end, no clear answer to the only question that mattered: did this make us money?</p>
 <p>The good news is that most bad agency relationships are predictable. The warning signs show up in the first conversation, if you know what to listen for. This guide covers what to work out before you start looking, the questions worth asking, the red flags that should end the conversation, and what a healthy first month looks like.</p>
@@ -159,7 +159,7 @@
 </ol>
 
 <h2 id="small-vs-large">Small agency or large agency?</h2>
-<p>Large agencies bring more specializts and established processes. Small agencies usually bring direct access to the person doing the work, and more flexibility. For most small businesses, the deciding factor is attention: who will actually think about your account each week? Ask, and judge the answer.</p>
+<p>Large agencies bring more specialists and established processes. Small agencies usually bring direct access to the person doing the work, and more flexibility. For most small businesses, the deciding factor is attention: who will actually think about your account each week? Ask, and judge the answer.</p>
 
 <h2 id="final-checklist">A short checklist before you sign</h2>
 <ul>
@@ -181,7 +181,7 @@
   </div>
 </section><section class="lav" aria-labelledby="related-title">
   <div class="wrap">
-<div class="section-head"><div class="eyebrow">/ RELATED POSTS</div><h2 id="related-title">Keep <span class="accent">reading.</span></h2></div><div class="grid grid-3"><a class="post-card" href="/blog/realistic-ad-budget-small-business/"><img src="/assets/img/blog/realistic-ad-budget-small-business.jpg" width="1200" height="630" alt="Cover illustration for the article “What a realistic ad budget looks like for a small business” by Vike Marketing" loading="lazy" decoding="async"><div class="post-body"><span class="eyebrow" style="margin:0">PLANNING</span><h3>What a realistic ad budget looks like for a small business</h3><p>Forget “what do other businesses spend”. Work backwards from what a customer is worth and what the platforms need to learn.</p><span class="meta">8 September 2026 · 5 min read</span></div></a><a class="post-card" href="/blog/meta-ads-vs-google-ads-small-business/"><img src="/assets/img/blog/meta-ads-vs-google-ads-small-business.jpg" width="1200" height="630" alt="Cover illustration for the article “Meta Ads vs Google Ads: which should a small business start with?” by Vike Marketing" loading="lazy" decoding="async"><div class="post-body"><span class="eyebrow" style="margin:0">COMPARISON</span><h3>Meta Ads vs Google Ads: which should a small business start with?</h3><p>Google captures demand that already exists. Meta creates it. Here&#x27;s how to tell which one your business needs first.</p><span class="meta">27 August 2026 · 5 min read</span></div></a><a class="post-card" href="/blog/local-seo-basics/"><img src="/assets/img/blog/local-seo-basics.jpg" width="1200" height="630" alt="Cover illustration for the article “Local SEO basics: a practical checklist for small businesses” by Vike Marketing" loading="lazy" decoding="async"><div class="post-body"><span class="eyebrow" style="margin:0">SEO</span><h3>Local SEO basics: a practical checklist for small businesses</h3><p>Google Business Profile, reviews, consistent details and location pages: the local SEO work that actually moves the needle.</p><span class="meta">17 September 2026 · 5 min read</span></div></a></div>
+<div class="section-head"><div class="eyebrow">/ RELATED POSTS</div><h2 id="related-title">Keep <span class="accent">reading.</span></h2></div><div class="grid grid-3"><a class="post-card" href="/blog/realistic-ad-budget-small-business/"><picture><source type="image/webp" srcset="/assets/img/blog/realistic-ad-budget-small-business-600.webp 600w, /assets/img/blog/realistic-ad-budget-small-business.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px"><img src="/assets/img/blog/realistic-ad-budget-small-business.jpg" srcset="/assets/img/blog/realistic-ad-budget-small-business-600.jpg 600w, /assets/img/blog/realistic-ad-budget-small-business.jpg 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px" width="1200" height="630" alt="Cover illustration for the article “What a realistic ad budget looks like for a small business” by Vike Marketing" loading="lazy" decoding="async"></picture><div class="post-body"><span class="eyebrow" style="margin:0">PLANNING</span><h3>What a realistic ad budget looks like for a small business</h3><p>Forget “what do other businesses spend”. Work backwards from what a customer is worth and what the platforms need to learn.</p><span class="meta">8 September 2026 · 5 min read</span></div></a><a class="post-card" href="/blog/meta-ads-vs-google-ads-small-business/"><picture><source type="image/webp" srcset="/assets/img/blog/meta-ads-vs-google-ads-small-business-600.webp 600w, /assets/img/blog/meta-ads-vs-google-ads-small-business.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px"><img src="/assets/img/blog/meta-ads-vs-google-ads-small-business.jpg" srcset="/assets/img/blog/meta-ads-vs-google-ads-small-business-600.jpg 600w, /assets/img/blog/meta-ads-vs-google-ads-small-business.jpg 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px" width="1200" height="630" alt="Cover illustration for the article “Meta Ads vs Google Ads: which should a small business start with?” by Vike Marketing" loading="lazy" decoding="async"></picture><div class="post-body"><span class="eyebrow" style="margin:0">COMPARISON</span><h3>Meta Ads vs Google Ads: which should a small business start with?</h3><p>Google captures demand that already exists. Meta creates it. Here&#x27;s how to tell which one your business needs first.</p><span class="meta">27 August 2026 · 5 min read</span></div></a><a class="post-card" href="/blog/local-seo-basics/"><picture><source type="image/webp" srcset="/assets/img/blog/local-seo-basics-600.webp 600w, /assets/img/blog/local-seo-basics.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px"><img src="/assets/img/blog/local-seo-basics.jpg" srcset="/assets/img/blog/local-seo-basics-600.jpg 600w, /assets/img/blog/local-seo-basics.jpg 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 380px" width="1200" height="630" alt="Cover illustration for the article “Local SEO basics: a practical checklist for small businesses” by Vike Marketing" loading="lazy" decoding="async"></picture><div class="post-body"><span class="eyebrow" style="margin:0">SEO</span><h3>Local SEO basics: a practical checklist for small businesses</h3><p>Google Business Profile, reviews, consistent details and location pages: the local SEO work that actually moves the needle.</p><span class="meta">17 September 2026 · 5 min read</span></div></a></div>
   </div>
 </section><section class="final" aria-labelledby="final-title">
   <div class="wrap">
@@ -197,14 +197,14 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="/" class="logo" aria-label="Vike Marketing home"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span></span></a>
+        <a href="/" class="logo"><span class="mark" aria-hidden="true">V</span><span>Vike<span class="dot">.</span><span class="visually-hidden"> Marketing, home page</span></span></a>
         <p class="foot-desc">Performance marketing for small and growing businesses: Meta and Google ads, campaign strategy, creative production, SEO, social media management and marketing automation. Run remotely from Lviv, Ukraine.</p>
       </div>
       <div class="foot-col"><h2>Services</h2><a href="/services/meta-ads-management/">Meta Ads Management</a><a href="/services/google-ads-management/">Google Ads Management</a><a href="/services/seo/">SEO</a><a href="/services/creative-production/">Creative Production</a></div>
       <div class="foot-col"><h2>Industries</h2><a href="/industries/ecommerce/">Ecommerce</a><a href="/industries/local-services/">Local Services</a><a href="/industries/construction-real-estate/">Construction &amp; Real Estate</a><a href="/industries/education-schools/">Education &amp; Schools</a></div>
       <div class="foot-col">
         <h2>Company</h2>
-        <a href="/about/">About</a><a href="/pricing/">Pricing</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
+        <a href="/about/">About</a><a href="/pricing/">Pricing</a><a href="/free-audit/">Free funnel audit</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
         <h2 class="mt-24">Locations</h2>
         <a href="/locations/netherlands/">Netherlands</a><a href="/locations/united-kingdom/">United Kingdom</a><a href="/locations/ireland/">Ireland</a>
       </div>
@@ -245,6 +245,7 @@
           <p class="form-error" role="alert"></p>
           <p class="form-note">We reply within 24 hours on business days. Your details are only used to arrange the call. See our <a href="/privacy/">Privacy Policy</a>.</p>
         </form>
+      <p class="booking-alt">Prefer to pick a time yourself? <a data-booking-link href="/contact/" target="_blank" rel="noopener">Open the calendar</a></p>
     </div>
     <div class="success-state" data-success-state hidden>
       <div class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></div>
@@ -253,6 +254,11 @@
     </div>
   </div>
 </div>
+
+<nav class="mobile-cta" id="mobileCta" aria-label="Quick actions">
+  <a class="btn btn-secondary" href="/free-audit/">Free audit</a>
+  <button class="btn btn-primary" type="button" data-book>Book a call →</button>
+</nav>
 
 <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
   <p>We use Google Analytics cookies to understand which pages are useful. They stay off unless you accept. Details in our <a href="/privacy/">Privacy Policy</a>.</p>
