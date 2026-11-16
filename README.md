@@ -13,7 +13,6 @@ site/
 ├── blog/       (+ 6 articles, incl. original agency-website research)
 ├── free-audit/                     Free funnel audit landing page
 ├── pricing/  about/  contact/  privacy/  terms/
-├── planner/                        Personal to-do planner (installable web app, not indexed, not linked from the site)
 ├── 404.html  sitemap.xml  robots.txt  llms.txt  netlify.toml
 └── assets/
     ├── css/style.css               all shared styles
@@ -45,6 +44,10 @@ Clean URLs work out of the box because every page is `folder/index.html`.
 10. **Free audit turnaround.** `/free-audit/` promises a reply within 24 hours and a written audit typically within 2–4 business days, based on the original site's FAQ. Confirm you can keep to this.
 11. **Social profiles (optional).** No social URLs were available, so none are linked. If you add them, also add a `sameAs` array to the Organization JSON-LD on the home page.
 12. **After launch.** Set up the custom domain plus HTTPS in Netlify, verify the site in Google Search Console, submit `https://vikemarketing.com/sitemap.xml`, and test the booking form once on the live domain.
+
+## Planner (separate site)
+
+[`planner/`](planner/) is a personal to-do planner: an installable, offline-capable web app in Ukrainian. It is not part of the Vike website and is not published with it. `.github/workflows/planner-pages.yml` deploys the folder to GitHub Pages on every change to it on the default branch. Enable it once under **Settings → Pages → Source: GitHub Actions**. The folder uses only relative paths, so it also works on any other static host.
 
 ## Research
 

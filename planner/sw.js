@@ -1,13 +1,8 @@
-/* Offline support for the planner: serve the cached copy at once, refresh it in the background. */
-const CACHE = 'planner-v1';
-const SHELL = [
-  '/planner/',
-  '/planner/manifest.webmanifest',
-  '/planner/icon.svg',
-  '/planner/icon-180.png',
-  '/planner/icon-192.png',
-  '/planner/icon-512.png',
-];
+/* Offline support for the planner: serve the cached copy at once, refresh it in the background.
+   All paths are relative to this file, so the planner works at any address. */
+const CACHE = 'planner-v2';
+const SCOPE = new URL('./', self.location).pathname;
+const SHELL = ['./', 'manifest.webmanifest', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -25,7 +20,7 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  if (url.origin !== self.location.origin || !url.pathname.startsWith('/planner/')) return;
+  if (url.origin !== self.location.origin || !url.pathname.startsWith(SCOPE)) return;
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);

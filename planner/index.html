@@ -12,9 +12,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Планер">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="/planner/manifest.webmanifest">
-<link rel="apple-touch-icon" href="/planner/icon-180.png">
-<link rel="icon" href="/planner/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <style>
 :root{
   --bg:#000;
@@ -244,6 +244,13 @@ h1{font-size:36px;line-height:1.1;font-weight:750;letter-spacing:-.025em;margin-
 <script>
 (() => {
 'use strict';
+
+// Relative links (manifest, icons, service worker) need the address to end with a slash.
+if (!/\/$|\.html$/.test(location.pathname)) {
+  let tried = false;
+  try { tried = !!sessionStorage.getItem('planner.slash'); sessionStorage.setItem('planner.slash', '1'); } catch (e) {}
+  if (!tried) { location.replace(location.pathname + '/' + location.search + location.hash); return; }
+}
 
 const KEY = 'planner.v1';
 const DAYS_AHEAD = 14;
@@ -690,8 +697,8 @@ setInterval(checkDay, 60000);
 rollover();
 render();
 if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
-  navigator.serviceWorker.register('/planner/sw.js', { scope: '/planner/' }).catch(() => {});
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 })();
 </script>
