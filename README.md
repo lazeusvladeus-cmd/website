@@ -13,6 +13,7 @@ site/
 ├── blog/       (+ 6 articles, incl. original agency-website research)
 ├── free-audit/                     Free funnel audit landing page
 ├── pricing/  about/  contact/  privacy/  terms/
+├── planner/                        Personal to-do planner (installable web app, not indexed, not linked from the site)
 ├── 404.html  sitemap.xml  robots.txt  llms.txt  netlify.toml
 └── assets/
     ├── css/style.css               all shared styles
