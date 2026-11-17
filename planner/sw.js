@@ -1,6 +1,6 @@
 /* Offline support for the planner: serve the cached copy at once, refresh it in the background.
    All paths are relative to this file, so the planner works at any address. */
-const CACHE = 'planner-v2';
+const CACHE = 'planner-v3';
 const SCOPE = new URL('./', self.location).pathname;
 const SHELL = ['./', 'manifest.webmanifest', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
@@ -25,7 +25,8 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     const hit = await cache.match(req, { ignoreSearch: true });
-    const fresh = fetch(req).then(res => {
+    // 'no-cache' makes the background refresh ask the server, so a new version arrives on the next launch.
+    const fresh = fetch(req, { cache: 'no-cache' }).then(res => {
       if (res.ok) cache.put(req, res.clone());
       return res;
     });
