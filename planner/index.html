@@ -30,7 +30,11 @@
   --c-study:#7fb0ff;
   --c-biz:#ffb65c;
   --c-idea:#c4a1ff;
-  --c-life:#ff8fb1;
+  --c-life:#f58bd0;
+  --c-carrier:#4fd1c5;
+  --c-furn:#d9b384;
+  --c-ascora:#6ee07a;
+  --c-drop:#ff7b6b;
   --ease:cubic-bezier(.2,.8,.2,1);
   color-scheme:dark;
 }
@@ -106,6 +110,10 @@ h1{font-size:36px;line-height:1.1;font-weight:750;letter-spacing:-.025em;margin-
 [data-cat=biz]{--c:var(--c-biz);--f:var(--c-biz)}
 [data-cat=idea]{--c:var(--c-idea);--f:var(--c-idea)}
 [data-cat=life]{--c:var(--c-life);--f:var(--c-life)}
+[data-cat=carrier]{--c:var(--c-carrier);--f:var(--c-carrier)}
+[data-cat=furn]{--c:var(--c-furn);--f:var(--c-furn)}
+[data-cat=ascora]{--c:var(--c-ascora);--f:var(--c-ascora)}
+[data-cat=drop]{--c:var(--c-drop);--f:var(--c-drop)}
 .task.enter{animation:enter .32s var(--ease)}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}}
 .check{flex:none;width:54px;height:54px;display:grid;place-items:center}
@@ -118,6 +126,10 @@ h1{font-size:36px;line-height:1.1;font-weight:750;letter-spacing:-.025em;margin-
 .body{flex:1;min-width:0;min-height:54px;text-align:left;padding:15px 16px 15px 0;display:block}
 .task + .task .body{box-shadow:0 -1px 0 var(--line)}
 .text{display:block;overflow-wrap:anywhere;transition:color .25s}
+.meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:3px;font-size:13px;line-height:1.3;color:var(--muted)}
+.meta .pct{flex:none;margin-left:auto;font-weight:650;font-variant-numeric:tabular-nums;color:var(--f)}
+.pbar{display:block;height:4px;margin-top:8px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:2px;background:var(--f);transition:width .3s var(--ease)}
 .task.done .text{color:var(--faint);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.22)}
 .group.done .task{--c:#3a3a40}
 .group.done .task .check circle{opacity:.55}
@@ -182,6 +194,13 @@ h1{font-size:36px;line-height:1.1;font-weight:750;letter-spacing:-.025em;margin-
 .sheet textarea{display:block;width:100%;resize:none;overflow:hidden;font-size:22px;line-height:1.25;font-weight:650;letter-spacing:-.015em;padding:8px 4px 6px}
 .lbl{font-size:12px;font-weight:650;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:18px 4px 10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip.pct{padding:0 12px 0 14px;gap:2px}
+.chip.pct input{width:3ch;min-width:0;font-size:15px;font-weight:500;text-align:right;-webkit-appearance:none;appearance:none}
+.chip.pct input:placeholder-shown{width:6.4ch;text-align:left}
+.chip.pct input:placeholder-shown + span{display:none}
+.chip.pct input::placeholder{color:var(--muted)}
+.chip.pct.sel input,.chip.pct.sel span{color:var(--accent)}
+.chip.pct.sel{background:rgba(212,255,79,.14);box-shadow:inset 0 0 0 1.5px var(--accent)}
 .chip.date input{position:absolute;inset:0;width:100%;height:100%;opacity:0;-webkit-appearance:none;appearance:none}
 .actions{display:flex;gap:10px;margin-top:26px}
 .actions button{height:52px;border-radius:26px;font-weight:600}
@@ -231,6 +250,19 @@ h1{font-size:36px;line-height:1.1;font-weight:750;letter-spacing:-.025em;margin-
         <label class="chip date" id="sDateChip"><span>Дата</span><input type="date" id="sDate" aria-label="Обрати дату"></label>
         <button type="button" class="chip" data-when="later">Колись</button>
       </div>
+      <p class="lbl">Протягом часу</p>
+      <div class="chips" id="sSpan">
+        <button type="button" class="chip" data-span="none">Один день</button>
+        <label class="chip date" id="sUntilChip"><span>До дати</span><input type="date" id="sUntil" aria-label="Виконати до дати"></label>
+      </div>
+      <p class="lbl">Виконано</p>
+      <div class="chips" id="sProg">
+        <button type="button" class="chip" data-p="25">25%</button>
+        <button type="button" class="chip" data-p="50">50%</button>
+        <button type="button" class="chip" data-p="75">75%</button>
+        <button type="button" class="chip" data-p="100">100%</button>
+        <label class="chip pct" id="sPctChip"><input type="text" id="sPct" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="Свій %" aria-label="Свій відсоток"><span>%</span></label>
+      </div>
       <p class="lbl">Категорія</p>
       <div class="chips" id="sCat"></div>
       <div class="actions">
@@ -259,6 +291,10 @@ const CATS = [
   { id: 'biz',   name: 'Бізнес' },
   { id: 'idea',  name: 'Ідеї' },
   { id: 'life',  name: 'Особисте' },
+  { id: 'carrier', name: 'Carrier' },
+  { id: 'furn',  name: 'Меблі' },
+  { id: 'ascora', name: 'Ascora' },
+  { id: 'drop',  name: 'Дропшипінг' },
 ];
 const CAT = Object.fromEntries(CATS.map(c => [c.id, c]));
 const CHECK = '<button type="button" class="check" role="checkbox" aria-label="Виконано"><svg viewBox="0 0 25 25" aria-hidden="true"><circle cx="12.5" cy="12.5" r="11.5"/><path d="M7.5 13l3.4 3.4 6.6-7.4"/></svg></button>';
@@ -288,8 +324,16 @@ const F = {
   wdShort: fmt({ weekday: 'short' }),
   dayMonth: fmt({ day: 'numeric', month: 'long' }),
   chip: fmt({ weekday: 'short', day: 'numeric', month: 'short' }),
+  short: fmt({ day: 'numeric', month: 'short' }),
 };
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const diff = (a, b) => Math.round((parse(b) - parse(a)) / 864e5);
+const plural = (n, one, few, many) => {
+  const m10 = n % 10, m100 = n % 100;
+  return m10 === 1 && m100 !== 11 ? one : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? few : many;
+};
+// A task shows on every day from its start date to its deadline (or only on its start date).
+const onDay = (t, day) => day === null ? t.date === null : t.date !== null && t.date <= day && day <= (t.until || t.date);
 
 /* ---------- state ---------- */
 let tasks = load();
@@ -304,11 +348,17 @@ function load() {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
     const arr = Array.isArray(raw) ? raw : raw && Array.isArray(raw.tasks) ? raw.tasks : [];
-    return arr.filter(t => t && typeof t.text === 'string' && t.id).map(t => ({
-      id: String(t.id), text: t.text, cat: CAT[t.cat] ? t.cat : null,
-      date: typeof t.date === 'string' && /^\d{4}-\d\d-\d\d$/.test(t.date) ? t.date : null,
-      done: !!t.done, doneAt: t.doneAt || null,
-    }));
+    const isDate = v => typeof v === 'string' && /^\d{4}-\d\d-\d\d$/.test(v);
+    return arr.filter(t => t && typeof t.text === 'string' && t.id).map(t => {
+      const date = isDate(t.date) ? t.date : null;
+      const done = !!t.done;
+      const progress = done ? 100 : Math.min(99, Math.max(0, Math.round(Number(t.progress)) || 0));
+      return {
+        id: String(t.id), text: t.text, cat: CAT[t.cat] ? t.cat : null,
+        date, until: date && isDate(t.until) && t.until > date ? t.until : null,
+        progress, done, doneAt: t.doneAt || null,
+      };
+    });
   } catch (e) { return []; }
 }
 function save() {
@@ -317,14 +367,14 @@ function save() {
 const byId = id => tasks.find(t => t.id === id);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
-/* Unfinished tasks from past days move to today; old finished ones are dropped. */
+/* Unfinished tasks from past days move to today (unless their deadline is still ahead); old finished ones are dropped. */
 function rollover() {
   const cutoff = Date.now() - 14 * 864e5;
   const n = tasks.length;
   tasks = tasks.filter(t => !(t.done && (t.doneAt || 0) < cutoff));
   let changed = tasks.length !== n;
   for (const t of tasks) {
-    if (!t.done && t.date && t.date < today) { t.date = today; changed = true; }
+    if (!t.done && t.date && t.date < today && !(t.until && t.until >= today)) { t.date = today; t.until = null; changed = true; }
   }
   if (changed) save();
 }
@@ -345,7 +395,7 @@ function renderHead() {
   $('title').textContent = title;
   $('eyebrow').textContent = eyebrow;
 
-  const items = tasks.filter(t => t.date === view);
+  const items = tasks.filter(t => onDay(t, view));
   const done = items.filter(t => t.done).length, total = items.length;
   const ring = $('ring'), C = 138.23;
   ring.classList.toggle('none', !total);
@@ -356,21 +406,28 @@ function renderHead() {
 }
 
 function renderDays() {
-  const open = new Set(tasks.filter(t => !t.done).map(t => t.date));
+  const open = tasks.filter(t => !t.done);
+  const has = day => open.some(t => onDay(t, day));
   const frag = document.createDocumentFragment();
-  const later = el('button', 'day later' + (view === null ? ' sel' : '') + (open.has(null) ? ' has' : ''));
+  const later = el('button', 'day later' + (view === null ? ' sel' : '') + (has(null) ? ' has' : ''));
   later.type = 'button'; later.dataset.day = '';
   later.innerHTML = ICON.later + '<small>Колись</small>';
   frag.append(later);
   for (let i = 0; i < DAYS_AHEAD; i++) {
     const day = addDays(today, i), d = parse(day);
-    const b = el('button', 'day' + (i === 0 ? ' today' : '') + (view === day ? ' sel' : '') + (open.has(day) ? ' has' : ''));
+    const b = el('button', 'day' + (i === 0 ? ' today' : '') + (view === day ? ' sel' : '') + (has(day) ? ' has' : ''));
     b.type = 'button'; b.dataset.day = day;
     b.setAttribute('aria-label', `${F.wdLong.format(d)}, ${F.dayMonth.format(d)}`);
     b.append(el('small', '', F.wdShort.format(d)), el('span', '', d.getDate()), el('i'));
     frag.append(b);
   }
   $('days').replaceChildren(frag);
+}
+
+function dueText(until) {
+  const left = diff(today, until);
+  const when = 'до ' + F.short.format(parse(until));
+  return left <= 0 ? when + ' · останній день' : `${when} · ще ${left} ${plural(left, 'день', 'дні', 'днів')}`;
 }
 
 function row(t) {
@@ -382,6 +439,16 @@ function row(t) {
   const b = el('button', 'body');
   b.type = 'button';
   b.append(el('span', 'text', t.text));
+  if (!t.done && (t.until || t.progress > 0)) {
+    const m = el('span', 'meta');
+    m.append(el('span', 'due', t.until ? dueText(t.until) : ''));
+    if (t.progress > 0) m.append(el('span', 'pct', t.progress + '%'));
+    const bar = el('span', 'pbar');
+    const fill = el('i');
+    fill.style.width = t.progress + '%';
+    bar.append(fill);
+    b.append(m, bar);
+  }
   li.append(b);
   return li;
 }
@@ -403,7 +470,7 @@ function group(label, key, items, clearable) {
 
 function renderList() {
   clearTimeout(listTimer);
-  const items = tasks.filter(t => t.date === view);
+  const items = tasks.filter(t => onDay(t, view));
   const open = items.filter(t => !t.done);
   const done = items.filter(t => t.done).sort((a, b) => (b.doneAt || 0) - (a.doneAt || 0));
   const frag = document.createDocumentFragment();
@@ -445,7 +512,7 @@ function renderList() {
 
 /* ---------- actions ---------- */
 function addTasks(texts) {
-  const added = texts.map(text => ({ id: uid(), text, cat, date: view, done: false, doneAt: null }));
+  const added = texts.map(text => ({ id: uid(), text, cat, date: view, until: null, progress: 0, done: false, doneAt: null }));
   tasks.push(...added);
   added.forEach(t => justAdded.add(t.id));
   save();
@@ -457,6 +524,7 @@ function addTasks(texts) {
 function toggle(t, li) {
   t.done = !t.done;
   t.doneAt = t.done ? Date.now() : null;
+  t.progress = t.done ? 100 : 0;
   save();
   li.classList.toggle('done', t.done);
   li.querySelector('.check').setAttribute('aria-checked', t.done);
@@ -502,7 +570,7 @@ $('list').addEventListener('click', e => {
   const act = e.target.closest('[data-act]');
   if (act) {
     if (act.dataset.act === 'clear') {
-      const ids = tasks.filter(t => t.date === view && t.done).map(t => t.id);
+      const ids = tasks.filter(t => onDay(t, view) && t.done).map(t => t.id);
       removeTasks(ids, ids.length === 1 ? 'Виконану задачу прибрано' : 'Виконані задачі прибрано');
     } else if (act.dataset.act === 'hint') {
       try { localStorage.setItem(KEY + '.hint', '1'); } catch (err) {}
@@ -576,7 +644,7 @@ input.addEventListener('paste', e => {
 });
 
 /* ---------- task sheet ---------- */
-const scrim = $('scrim'), sText = $('sText'), sDate = $('sDate');
+const scrim = $('scrim'), sText = $('sText'), sDate = $('sDate'), sUntil = $('sUntil'), sPct = $('sPct');
 let originalText = '';
 
 function grow() { sText.style.height = 'auto'; sText.style.height = sText.scrollHeight + 'px'; }
@@ -592,7 +660,45 @@ function syncSheet() {
   chip.querySelector('span').textContent = when === 'date' ? F.chip.format(parse(t.date)) : 'Дата';
   sDate.min = today;
   sDate.value = t.date || '';
+
+  const uChip = $('sUntilChip');
+  uChip.classList.toggle('sel', !!t.until);
+  uChip.querySelector('span').textContent = t.until ? 'До ' + F.chip.format(parse(t.until)) : 'До дати';
+  sUntil.min = t.date && t.date > today ? t.date : today;
+  sUntil.value = t.until || '';
+  $('sSpan').querySelector('[data-span]').classList.toggle('sel', !t.until);
+
+  syncProg(true);
   catChips($('sCat'), t.cat);
+}
+
+function syncProg(writeInput) {
+  const t = editing;
+  if (!t) return;
+  for (const b of $('sProg').querySelectorAll('[data-p]')) b.classList.toggle('sel', Number(b.dataset.p) === t.progress);
+  const custom = t.progress > 0 && ![25, 50, 75, 100].includes(t.progress);
+  $('sPctChip').classList.toggle('sel', custom);
+  if (writeInput) sPct.value = custom ? String(t.progress) : '';
+}
+
+function setProgress(p) {
+  const t = editing;
+  if (!t) return;
+  p = Math.min(100, Math.max(0, Math.round(p) || 0));
+  const wasDone = t.done;
+  t.progress = p;
+  t.done = p >= 100;
+  if (t.done && !wasDone) t.doneAt = Date.now();
+  if (!t.done) t.doneAt = null;
+  save(); syncProg(false); render();
+}
+
+function setUntil(v) {
+  const t = editing;
+  if (!t) return;
+  if (t.date === null) t.date = today;          // a deadline needs a start: begin today
+  t.until = v && v > t.date ? v : null;
+  save(); syncSheet(); render();
 }
 
 function openSheet(t) {
@@ -612,7 +718,7 @@ function closeSheet() {
   const text = sText.value.replace(/\s+/g, ' ').trim();
   t.text = text || originalText;
   save();
-  sText.blur();
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   scrim.classList.remove('open');
   setTimeout(() => { if (!editing) scrim.hidden = true; }, 340);
   render();
@@ -620,7 +726,9 @@ function closeSheet() {
 
 function moveTo(date) {
   if (!editing) return;
+  const span = editing.date && editing.until ? diff(editing.date, editing.until) : 0;
   editing.date = date;
+  editing.until = date && span > 0 ? addDays(date, span) : null;   // keep the length of a multi-day task
   save(); syncSheet(); render();
 }
 
@@ -632,6 +740,19 @@ $('sWhen').addEventListener('click', e => {
   moveTo(b.dataset.when === 'later' ? null : b.dataset.when === 'today' ? today : addDays(today, 1));
 });
 sDate.addEventListener('change', () => { if (sDate.value) moveTo(sDate.value < today ? today : sDate.value); });
+sUntil.addEventListener('change', () => { if (sUntil.value) setUntil(sUntil.value); });
+$('sSpan').addEventListener('click', e => { if (e.target.closest('[data-span]')) setUntil(null); });
+$('sProg').addEventListener('click', e => {
+  const b = e.target.closest('[data-p]');
+  if (b) { sPct.blur(); setProgress(Number(b.dataset.p)); sPct.value = ''; }
+});
+sPct.addEventListener('input', () => {
+  sPct.value = sPct.value.replace(/\D/g, '').slice(0, 3);
+  if (Number(sPct.value) > 100) sPct.value = '100';
+  setProgress(Number(sPct.value));
+});
+sPct.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sPct.blur(); } });
+sPct.addEventListener('focus', () => sPct.select());
 $('sCat').addEventListener('click', e => {
   const b = e.target.closest('.chip');
   if (!b || !editing) return;
